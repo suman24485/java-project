@@ -33,7 +33,7 @@
       <manifest>
         <attribute name="Main-Class" value="Rectangulator" />
       </manifest>
-    </jar
+    </jar>
   </target>
 
   <target name="main" depends="compile,jar" >

@@ -4,7 +4,7 @@ pipeline{
   stages{
     stage('build'){
       steps{
-        sh 'export JAVA_HOME=/usr/java/latest'
+        sh 'export JAVA_HOME="/usr/java/latest"'
         sh 'export PATH=$JAVA_HOME/bin:$PATH'
         sh 'ant -f build.xml -v'
       }

@@ -4,6 +4,7 @@
 
   <property name="src.dir" location="src" />
   <property name="build.dir" location="bin" />
+  <property name="docs.dir" location="docs" />
   <property name="dist.dir" location="dist"/>
 
   <path id="class.path">
@@ -23,13 +24,13 @@
   </target>
 
   <target name="compile" depends="clean,mkdir">
-    <javac srcdir="${src.dir}" dest.dir="${build.dir}" >
+    <javac srcdir="${src.dir}" destdir="${build.dir}" >
       <classpath refid="class.path" />
     </javac>
   </target>
 
   <target name="jar" depends="compile" >
-    <jar destfile="${dist.dir}\rectangle.jar" basedir="{build.dir}" >
+    <jar destfile="${dist.dir}\rectangle.jar" basedir="${build.dir}" >
       <manifest>
         <attribute name="Main-Class" value="Rectangulator" />
       </manifest>

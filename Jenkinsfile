@@ -1,9 +1,8 @@
 pipeline{
-  agent none
-
-  options{
-    buildDiscarder(logRotator(numToKeepStr: '2', artifactNumToKeepStr: '1'))
+  agent {
+    label 'CentOS'
   }
+
   stages{
       stage('Unit Tests'){
         agent{

@@ -1,7 +1,5 @@
 pipeline{
-  agent {
-    label 'CentOS'
-  }
+  agent none
 
   stages{
       stage('Unit Tests'){
@@ -43,13 +41,18 @@ pipeline{
         sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 3 4"
       }
     }
-    stage("Test on Debian"){
+    /*stage("Test on Debian"){
       agent {
         docker 'openjdk:8u131-jre'
       }
       steps{
         sh "wget http://masterj.suman.com/rectangles/all/rectangle_${env.BUILD_NUMBER}"
         sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 3 4"
+      }
+    }*/
+    stage('Promote to Green'){
+      steps{
+        sh "cp /var/www/html/rectangles/all/rectangle.${env.BUILD_NUMBER}.jar /var/www/html/rectangles/green/rectangle.${env.BUILD_NUMBER}.jar"
       }
     }
   }

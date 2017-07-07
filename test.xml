@@ -6,6 +6,7 @@
   <property name="build.dir" location="bin" />
   <property name="docs.dir" location="docs" />
   <property name="dist.dir" location="dist"/>
+  <property name="report.dir" location="reports"/>
 
   <path id="class.path">
     <pathelement location="./lib/junit-4.10.jar" />
@@ -16,18 +17,29 @@
     <delete dir="${build.dir}" />
     <delete dir="${docs.dir}" />
     <delete dir="${dist.dir}" />
+    <delete dir="${report.dir}" />
   </target>
 
   <target name="mkdir">
     <mkdir dir="${build.dir}" />
     <mkdir dir="${docs.dir}" />
     <mkdir dir="${dist.dir}" />
+    <mkdir dir="${report.dir}" />
   </target>
 
   <target name="compile" depends="clean,mkdir">
     <javac srcdir="${src.dir}" destdir="${build.dir}" >
       <classpath refid="class.path" />
     </javac>
+  </target>
+
+  <target name="test" depends="clean,mkdir,compile" >
+    <junit printsummary="yes" fork="true" />
+      <classpath refid="class.path" />
+      <test name="RectangleTest" todir="${report.dir}" outfile="result">
+        <formatter type="xml"/>
+      </test>
+    </junit>
   </target>
 
   <target name="jar" depends="compile" >
@@ -38,7 +50,7 @@
     </jar>
   </target>
 
-  <target name="main" depends="compile,jar" >
+  <target name="main" depends="test" >
     <description>Main Target</description>
   </target>
 </project>

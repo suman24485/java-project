@@ -10,8 +10,6 @@ pipeline{
           junit 'reports/result.xml'
         }
       }
-  }
-  stages{
     stage('build'){
       steps{
         sh 'ant -f build.xml -v'
